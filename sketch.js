@@ -48,7 +48,7 @@ function toX(x) {
 }
 
 function toY(y) {
-  return height - 20 - y * scale -6;
+  return height - 20 - y * scale;
 }
 
 // =========================
@@ -141,7 +141,7 @@ line(0, toY(0), width, toY(0));
 
 function drawBall(x, y, col = "black") {
   fill(col);
-  circle(toX(x), toY(y), 12);
+  circle(toX(x), toY(y) - 6, 12);
 }
 
 function drawTrail(x, y, col = 0) {
