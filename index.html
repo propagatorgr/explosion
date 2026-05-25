@@ -18,41 +18,53 @@ canvas {
   margin: 0 auto;
 }
 
-/* Layout */
+/* --- MAIN ROW --- */
 .topRow {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 40px;
+  gap: 60px;
   margin-top: 10px;
   flex-wrap: wrap;
 }
 
-/* Controls */
+/* --- CONTROL BLOCK --- */
 .controls {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Panel style */
+/* dropdown row */
+.rowInputs {
+  display: flex;
+  gap: 15px;
+}
+
+/* BUTTONS */
+.buttons {
+  margin-top: 6px;
+}
+
+/* PANEL STYLE */
 .panel {
-  background: #f8fbff;
-  border: 1px solid #ccd7e0;
+  background: #f4f7fb;
+  border: 1px solid #cfd9e3;
   padding: 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   min-width: 150px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   text-align: left;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
 }
 
 .panel div {
-  margin: 4px 0;
-  border-bottom: 1px solid #e5eef5;
-  padding-bottom: 3px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e3edf5;
 }
 
-/* Buttons */
-.buttons {
-  margin-top: 10px;
+.panel div:last-child {
+  border-bottom: none;
 }
 </style>
 
@@ -65,29 +77,34 @@ canvas {
 <div class="topRow">
 
   <div class="controls">
-    u0: <span id="u0val">20</span><br>
-    <input type="range" id="u0" min="5" max="50" value="20">
 
-    <br>
+    <div>
+      u0: <span id="u0val">20</span><br>
+      <input type="range" id="u0" min="5" max="50" value="20">
+    </div>
 
-    Μάζα δεξιά:
-    <select id="fraction">
-      <option value="1/2">m/2</option>
-      <option value="1/3">m/3</option>
-      <option value="2/3">2m/3</option>
-      <option value="1/4">m/4</option>
-      <option value="3/4">3m/4</option>
-    </select>
+    <div class="rowInputs">
+      <div>
+        Μάζα δεξιά:<br>
+        <select id="fraction">
+          <option value="1/2">m/2</option>
+          <option value="1/3">m/3</option>
+          <option value="2/3">2m/3</option>
+          <option value="1/4">m/4</option>
+          <option value="3/4">3m/4</option>
+        </select>
+      </div>
 
-    <br>
-
-    Ενέργεια:
-    <select id="energy">
-      <option value="10">10</option>
-      <option value="20">20</option>
-      <option value="40">40</option>
-      <option value="80">80</option>
-    </select>
+      <div>
+        Ενέργεια:<br>
+        <select id="energy">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="40">40</option>
+          <option value="80">80</option>
+        </select>
+      </div>
+    </div>
 
     <div class="buttons">
       <button onclick="startMotion()">Εκκίνηση</button>
@@ -95,6 +112,7 @@ canvas {
       <button onclick="resetSim()">RESET</button>
       <button id="pauseBtn" onclick="togglePause()">Stop</button>
     </div>
+
   </div>
 
   <div class="panel">
