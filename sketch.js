@@ -95,7 +95,8 @@ function draw() {
 
   background(220);
   image(trailLayer, 0, 0);
-
+  stroke(80);
+line(0, toY(0), width, toY(0));
   if (phase === "ready") {
     drawBall(0, 0);
   }
