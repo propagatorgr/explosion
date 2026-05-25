@@ -22,6 +22,7 @@ function getCanvasHeight() {
   return window.innerHeight * 0.5;
 }
 
+// ✅ ΕΔΩ ΤΟ ΚΛΕΙΔΙ ΓΙΑ ΤΟ Χ
 function computeScale() {
 
   let h = u * u / (2 * g);
@@ -35,8 +36,8 @@ function computeScale() {
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.48 / Smax;   // πιο ανοιχτό Χ
-  let scaleY = height * 0.65 / h;
+  let scaleX = width * 0.52 / Smax;   // 👈 άνοιγμα Χ αυξημένο
+  let scaleY = height * 0.60 / h;     // 👈 πιο “χαλαρό” ύψος
 
   scale = Math.min(scaleX, scaleY);
 }
@@ -56,6 +57,7 @@ function setup() {
   c.parent("sketch-holder");
 
   trailLayer = createGraphics(width, height);
+
   resetSim();
 }
 
@@ -100,7 +102,6 @@ function draw() {
   else if (phase === "up") {
 
     t += 0.05;
-
     let y = u * t - 0.5 * g * t * t;
 
     drawTrail(0, y);
@@ -165,7 +166,6 @@ function update(o) {
   if (!o || o.done) return;
 
   o.t += 0.05;
-
   o.x += o.vx * 0.05;
   o.y = o.H - 0.5 * g * o.t * o.t;
 
@@ -219,10 +219,12 @@ function updateUI() {
   }
 
   if (phase === "projectile") {
+
     if (left) {
       hVal = left.y;
       s1 = Math.abs(left.x).toFixed(2);
     }
+
     if (right) {
       s2 = Math.abs(right.x).toFixed(2);
     }
