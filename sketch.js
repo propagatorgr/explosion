@@ -13,15 +13,16 @@ let tMax = 0;
 let left = null;
 let right = null;
 
+let trailLayer;
+
 let scale;
+
+// =========================
 
 function getCanvasHeight() {
   return window.innerHeight * 0.5;
 }
 
-// =============================
-// VIEWPORT (το σωστό μέρος)
-// =============================
 function computeScale() {
 
   let h = u * u / (2 * g);
@@ -36,9 +37,9 @@ function computeScale() {
   let Smax = Math.max(vR, vL) * tFall;
 
   let scaleX = width * 0.45 / Smax;
-  let scaleY = height * 0.8 / h;
+  let scaleY = height * 0.7 / h;
 
-  scale = Math.min(scaleX, scaleY * 1.2);
+  scale = Math.min(scaleX, scaleY);
 }
 
 function toX(x) {
@@ -49,20 +50,24 @@ function toY(y) {
   return height - 20 - y * scale;
 }
 
-// =============================
+// =========================
 
 function setup() {
   let c = createCanvas(window.innerWidth * 0.9, getCanvasHeight());
   c.parent("sketch-holder");
+
+  trailLayer = createGraphics(width, height);
+
   resetSim();
 }
 
 function windowResized() {
   resizeCanvas(window.innerWidth * 0.9, getCanvasHeight());
+  trailLayer = createGraphics(width, height);
   computeScale();
 }
 
-// =============================
+// =========================
 
 function resetSim() {
 
@@ -74,43 +79,55 @@ function resetSim() {
 
   phase = "ready";
 
+  trailLayer.clear();
   computeScale();
+
+  paused = false;
+  document.getElementById("pauseBtn").innerText = "Stop";
 }
 
-// =============================
+// =========================
 
 function draw() {
 
   if (paused) return;
 
   background(220);
+  image(trailLayer, 0, 0);
 
   if (phase === "ready") {
     drawBall(0, 0);
+  }
 
-  } else if (phase === "up") {
+  else if (phase === "up") {
 
     t += 0.05;
 
     let y = u * t - 0.5 * g * t * t;
 
+    drawTrail(0, y);
     drawBall(0, y);
 
     if (t >= tMax) {
       t = tMax;
       phase = "top";
+      drawDashed();
     }
+  }
 
-  } else if (phase === "top") {
+  else if (phase === "top") {
 
     let H = u * u / (2 * g);
-
     drawBall(0, H);
+  }
 
-  } else if (phase === "projectile") {
+  else if (phase === "projectile") {
 
     update(left);
     update(right);
+
+    drawTrail(left.x, left.y, "red");
+    drawTrail(right.x, right.y, "blue");
 
     drawBall(left.x, left.y, "red");
     drawBall(right.x, right.y, "blue");
@@ -119,12 +136,37 @@ function draw() {
   updateUI();
 }
 
-// =============================
+// =========================
 
 function drawBall(x, y, col = "black") {
   fill(col);
   circle(toX(x), toY(y), 12);
 }
+
+function drawTrail(x, y, col = 0) {
+  trailLayer.stroke(col);
+  trailLayer.point(toX(x), toY(y));
+}
+
+function drawDashed() {
+
+  let H = u * u / (2 * g);
+
+  trailLayer.stroke(0);
+
+  let step = H / 20;
+
+  for (let y = 0; y < H; y += step) {
+    trailLayer.line(
+      toX(0),
+      toY(y),
+      toX(0),
+      toY(y + step / 2)
+    );
+  }
+}
+
+// =========================
 
 function update(o) {
   if (!o || o.done) return;
@@ -140,9 +182,7 @@ function update(o) {
   }
 }
 
-// =============================
-// CONTROLS
-// =============================
+// =========================
 
 function startMotion() {
   if (phase === "ready") {
@@ -170,11 +210,12 @@ function explode() {
 
 function togglePause() {
   paused = !paused;
+
+  let btn = document.getElementById("pauseBtn");
+  btn.innerText = paused ? "Resume" : "Stop";
 }
 
-// =============================
-// UI
-// =============================
+// =========================
 
 function updateUI() {
 
@@ -204,9 +245,7 @@ function updateUI() {
   document.getElementById("s2").innerText = s2;
 }
 
-// =============================
-// INPUTS
-// =============================
+// =========================
 
 document.addEventListener("DOMContentLoaded", () => {
 
