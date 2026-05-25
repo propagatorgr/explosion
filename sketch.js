@@ -36,10 +36,10 @@ function computeScale() {
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.52 / Smax;   // 👈 άνοιγμα Χ αυξημένο
-  let scaleY = height * 0.60 / h;     // 👈 πιο “χαλαρό” ύψος
+  let scaleX = width * 0.60 / Smax;   // ↑ άνοιγμα στο Χ
+let scaleY = height * 0.55 / h;     // ↓ λίγο πιο χαλαρό ύψος
 
-  scale = Math.min(scaleX, scaleY);
+scale = Math.min(scaleX, scaleY);
 }
 
 function toX(x) {
