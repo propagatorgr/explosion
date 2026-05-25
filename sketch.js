@@ -36,11 +36,10 @@ function computeScale() {
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.60 / Smax;
-let scaleY = height * 0.75 / h;   // 👈 ΑΞΙΟΠΟΙΟΥΜΕ το ύψος
+  let scaleX = width * 0.65 / Smax;     // 👈 γεμίζει περισσότερο πλάτος
+let scaleY = height * 0.80 / h;       // 👈 ανεβαίνει πιο ψηλά
 
-// ✅ balanced bias προς X χωρίς clipping
-scale = Math.min(scaleY, scaleX * 1.15);
+scale = Math.min(scaleY, scaleX);
 
 }
 
