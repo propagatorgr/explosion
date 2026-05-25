@@ -48,7 +48,7 @@ function toX(x) {
 }
 
 function toY(y) {
-  return height - 20 - y * scale;
+  return height - 20 - y * scale -6;
 }
 
 // =========================
