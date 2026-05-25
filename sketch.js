@@ -14,7 +14,6 @@ let left = null;
 let right = null;
 
 let trailLayer;
-
 let scale;
 
 // =========================
@@ -36,8 +35,8 @@ function computeScale() {
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.45 / Smax;
-  let scaleY = height * 0.7 / h;
+  let scaleX = width * 0.48 / Smax;   // πιο ανοιχτό Χ
+  let scaleY = height * 0.65 / h;
 
   scale = Math.min(scaleX, scaleY);
 }
@@ -57,7 +56,6 @@ function setup() {
   c.parent("sketch-holder");
 
   trailLayer = createGraphics(width, height);
-
   resetSim();
 }
 
@@ -157,12 +155,7 @@ function drawDashed() {
   let step = H / 20;
 
   for (let y = 0; y < H; y += step) {
-    trailLayer.line(
-      toX(0),
-      toY(y),
-      toX(0),
-      toY(y + step / 2)
-    );
+    trailLayer.line(toX(0), toY(y), toX(0), toY(y + step / 2));
   }
 }
 
@@ -210,9 +203,7 @@ function explode() {
 
 function togglePause() {
   paused = !paused;
-
-  let btn = document.getElementById("pauseBtn");
-  btn.innerText = paused ? "Resume" : "Stop";
+  document.getElementById("pauseBtn").innerText = paused ? "Resume" : "Stop";
 }
 
 // =========================
@@ -228,12 +219,10 @@ function updateUI() {
   }
 
   if (phase === "projectile") {
-
     if (left) {
       hVal = left.y;
       s1 = Math.abs(left.x).toFixed(2);
     }
-
     if (right) {
       s2 = Math.abs(right.x).toFixed(2);
     }
