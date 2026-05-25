@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <title>P5 Simulation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  text-align: center;
+  font-family: Arial;
+  background: #eee;
+}
 
-  <style>
-    body {
-      margin: 0;
-      text-align: center;
-      font-family: Arial;
-      background: #eee;
-    }
+canvas {
+  display: block;
+  margin: 0 auto;
+}
 
-    canvas {
-      display: block;
-      margin: 0 auto;
-    }
+.controls {
+  margin-top: 10px;
+}
 
-    .controls {
-      margin-top: 15px;
-    }
+.layout {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
-    .row {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 40px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
+.panel {
+  border: 1px solid #444;
+  background: white;
+  padding: 10px;
+  min-width: 140px;
+}
+</style>
 
-    .panel {
-      border: 1px solid #555;
-      background: white;
-      padding: 10px;
-      min-width: 140px;
-    }
-  </style>
 </head>
 
 <body>
 
-  <div id="sketch-holder"></div>
+<div id="sketch-holder"></div>
 
-  <div class="controls">
+<div class="controls">
+  u0: <span id="u0val">20</span><br>
+  <input type="range" id="u0" min="5" max="50" value="20">
+  
+  <br>
 
-    <div>
-      u0: <span id="u0val">20</span><br>
-      <input type="range" id="u0" min="5" max="50" value="20">
-    </div>
+  Μάζα δεξιά:
+  <select id="fraction">
+    <option value="1/2">m/2</option>
+    <option value="1/3">m/3</option>
+    <option value="2/3">2m/3</option>
+    <option value="1/4">m/4</option>
+    <option value="3/4">3m/4</option>
+  </select>
 
-    <div>
-      Μάζα δεξιά:
-      <select id="fraction">
-        <option value="1/2">m/2</option>
-        <option value="1/3">m/3</option>
-        <option value="2/3">2m/3</option>
-        <option value="1/4">m/4</option>
-        <option value="3/4">3m/4</option>
-      </select>
-    </div>
+  <br>
 
-    <div>
-      Ενέργεια:
-      <select id="energy">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="40">40</option>
-        <option value="80">80</option>
-      </select>
-    </div>
+  Ενέργεια:
+  <select id="energy">
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="40">40</option>
+    <option value="80">80</option>
+  </select>
+</div>
 
+<div class="layout">
+
+  <div>
+    <button onclick="startMotion()">Εκκίνηση</button>
+    <button onclick="explode()">Έκρηξη</button>
+    <button onclick="resetSim()">RESET</button>
+    <button id="pauseBtn" onclick="togglePause()">Stop</button>
   </div>
 
-  <div class="row">
-
-    <div>
-      <button onclick="startMotion()">Εκκίνη</button>
-      <button onclick="explode()">Έκρηξη</button>
-      <button onclick="resetSim()">RESET</button>
-      <button onclick="togglePause()">Stop / Resume</button>
-    </div>
-
-    <div class="panel">
-      <div>t = <span id="t">0</span></div>
-      <div>h(t) = <span id="h">0</span></div>
-      <div>S1 = <span id="s1">-</span></div>
-      <div>S2 = <span id="s2">-</span></div>
-    </div>
-
+  <div class="panel">
+    <div>t = <span id="t">0</span></div>
+    <div>h(t) = <span id="h">0</span></div>
+    <div>S1 = <span id="s1">-</span></div>
+    <div>S2 = <span id="s2">-</span></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-  <script src="sketch.js"></script>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+<script src="sketch.js"></script>
 
 </body>
 </html>
