@@ -221,10 +221,14 @@ function explode() {
 
   phase = "projectile";
 }
+
 window.toggleTheory = function() {
   let div = document.getElementById("theoryOverlay");
-  div.style.display = (div.style.display === "none") ? "block" : "none";
+  if (!div) return;
+
+  div.classList.toggle("active");
 }
+
 
 function togglePause() {
   paused = !paused;
