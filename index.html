@@ -18,17 +18,14 @@ canvas {
   margin: 0 auto;
 }
 
-/* --- MAIN ROW --- */
 .topRow {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 80px;
   margin-top: 10px;
-  
 }
 
-/* --- CONTROL BLOCK --- */
 .controls {
   display: flex;
   flex-direction: column;
@@ -36,31 +33,28 @@ canvas {
   gap: 6px;
 }
 
-/* dropdown row */
 .rowInputs {
   display: flex;
   gap: 15px;
 }
 
-/* BUTTONS */
 .buttons {
   margin-top: 6px;
 }
 
-/* PANEL STYLE */
 .panel {
   background: #f4f7fb;
   border: 1px solid #cfd9e3;
   padding: 12px;
   border-radius: 8px;
-  min-width: 150px;
+  min-width: 170px;
   text-align: left;
   box-shadow: 0 3px 8px rgba(0,0,0,0.12);
   margin-top: 28px;
 }
 
 .panel div {
-  padding: 4px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #e3edf5;
 }
 
@@ -80,11 +74,12 @@ canvas {
   <div class="controls">
 
     <div>
-      u0: <span id="u0val">20</span><br>
+      u<sub>0</sub>: <span id="u0val">20</span><br>
       <input type="range" id="u0" min="5" max="50" value="20">
     </div>
 
     <div class="rowInputs">
+
       <div>
         Μάζα δεξιά:<br>
         <select id="fraction">
@@ -97,14 +92,15 @@ canvas {
       </div>
 
       <div>
-        Ενέργεια:<br>
+        Ενέργεια έκρηξης:<br>
         <select id="energy">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="40">40</option>
-          <option value="80">80</option>
+          <option value="1">E</option>
+          <option value="2">2E</option>
+          <option value="4">4E</option>
+          <option value="8">8E</option>
         </select>
       </div>
+
     </div>
 
     <div class="buttons">
@@ -118,9 +114,10 @@ canvas {
 
   <div class="panel">
     <div>t = <span id="t">0</span></div>
-    <div>h(t) = <span id="h">0</span></div>
-    <div>S1 = <span id="s1">-</span></div>
-    <div>S2 = <span id="s2">-</span></div>
+    <div>h = <span id="h">0</span></div>
+    <div>S<sub>1</sub> / S<sub>2</sub> = <span id="ratioS">-</span></div>
+    <div>u<sub>1</sub> / u<sub>2</sub> = <span id="ratioU">-</span></div>
+    <div>E<sub>1</sub> / E<sub>2</sub> = <span id="ratioE">-</span></div>
   </div>
 
 </div>
