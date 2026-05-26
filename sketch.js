@@ -87,6 +87,9 @@ function resetSim() {
 
   paused = false;
   document.getElementById("pauseBtn").innerText = "Stop";
+  document.getElementById("fraction").disabled = false;
+  document.getElementById("energy").disabled = false;
+
 }
 
 // =========================
@@ -191,6 +194,8 @@ function startMotion() {
   if (phase === "ready") {
     t = 0;
     phase = "up";
+    document.getElementById("fraction").disabled = true;
+    document.getElementById("energy").disabled = true;
   }
 }
 
