@@ -12,7 +12,16 @@ body {
   background: #eef2f5;
   text-align: center;
 }
+#theoryOverlay h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
 
+#theoryOverlay h3 {
+  color: #3b4a5a;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
 canvas {
   display: block;
   margin: 0 auto;
@@ -122,19 +131,20 @@ canvas {
   </div>
 
 </div>
-<div id="theoryOverlay" style="
+<div id="theoryOverlay" onclick="toggleTheory()" style="
   display:none;
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
   z-index:1000;
 ">
 
-  <div style="
-    background:white;
+ <div onclick="event.stopPropagation()" style="
+    background:#fbfdff;
     width:60%;
     max-width:800px;
     margin:40px auto;
@@ -143,6 +153,7 @@ canvas {
     text-align:left;
     max-height:80%;
     overflow-y:auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   ">
 
     <h2>Θεωρητική Ανάλυση</h2>
