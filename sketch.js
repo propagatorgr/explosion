@@ -4,7 +4,8 @@ let phase = "ready";
 let paused = false;
 
 let u = 20;
-let E = 20;
+let Ebase = 10;   // βασική μονάδα Ε
+let Emult = 1;    // 1,2,4,8 από dropdown
 let frac = 0.5;
 
 let t = 0;
@@ -22,7 +23,7 @@ function getCanvasHeight() {
   return window.innerHeight * 0.5;
 }
 
-// ✅ ΕΔΩ ΤΟ ΚΛΕΙΔΙ ΓΙΑ ΤΟ Χ
+// ✅ SCALE (με ενέργεια)
 function computeScale() {
 
   let h = u * u / (2 * g);
@@ -31,16 +32,17 @@ function computeScale() {
   let mR = frac;
   let mL = 1 - frac;
 
+  let E = Emult * Ebase;
+
   let vR = Math.sqrt((2 * E) / (mR + (mR * mR) / mL));
   let vL = Math.abs((mR / mL) * vR);
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.65 / Smax;     // 👈 γεμίζει περισσότερο πλάτος
-let scaleY = height * 0.80 / h;       // 👈 ανεβαίνει πιο ψηλά
+  let scaleX = width * 0.65 / Smax;
+  let scaleY = height * 0.80 / h;
 
-scale = Math.min(scaleY, scaleX);
-
+  scale = Math.min(scaleY, scaleX);
 }
 
 function toX(x) {
@@ -95,8 +97,11 @@ function draw() {
 
   background(220);
   image(trailLayer, 0, 0);
+
+  // δάπεδο
   stroke(80);
-line(0, toY(0), width, toY(0));
+  line(0, toY(0), width, toY(0));
+
   if (phase === "ready") {
     drawBall(0, 0);
   }
@@ -104,6 +109,7 @@ line(0, toY(0), width, toY(0));
   else if (phase === "up") {
 
     t += 0.05;
+
     let y = u * t - 0.5 * g * t * t;
 
     drawTrail(0, y);
@@ -165,9 +171,11 @@ function drawDashed() {
 // =========================
 
 function update(o) {
+
   if (!o || o.done) return;
 
   o.t += 0.05;
+
   o.x += o.vx * 0.05;
   o.y = o.H - 0.5 * g * o.t * o.t;
 
@@ -186,13 +194,17 @@ function startMotion() {
   }
 }
 
+// ✅ explode με ενέργεια (σωστή φυσική)
 function explode() {
+
   if (phase !== "top") return;
 
   let H = u * u / (2 * g);
 
   let mR = frac;
   let mL = 1 - frac;
+
+  let E = Emult * Ebase;
 
   let vR = Math.sqrt((2 * E) / (mR + (mR * mR) / mL));
   let vL = -(mR / mL) * vR;
@@ -209,33 +221,28 @@ function togglePause() {
 }
 
 // =========================
-
+// ✅ PANEL: μόνο λόγοι
 function updateUI() {
 
   let hVal = 0;
-  let s1 = "-";
-  let s2 = "-";
 
   if (phase === "up") {
     hVal = u * t - 0.5 * g * t * t;
   }
 
-  if (phase === "projectile") {
-
-    if (left) {
-      hVal = left.y;
-      s1 = Math.abs(left.x).toFixed(2);
-    }
-
-    if (right) {
-      s2 = Math.abs(right.x).toFixed(2);
-    }
+  if (phase === "projectile" && left && right) {
+    hVal = left.y;
   }
+
+  // ✅ λόγοι (ανεξάρτητοι από χρόνο!)
+  let ratio = ((1 - frac) / frac).toFixed(2);
 
   document.getElementById("t").innerText = t.toFixed(2);
   document.getElementById("h").innerText = hVal.toFixed(2);
-  document.getElementById("s1").innerText = s1;
-  document.getElementById("s2").innerText = s2;
+
+  document.getElementById("ratioS").innerText = ratio;
+  document.getElementById("ratioU").innerText = ratio;
+  document.getElementById("ratioE").innerText = ratio;
 }
 
 // =========================
@@ -258,7 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   energySel.onchange = () => {
-    E = +energySel.value;
+    Emult = +energySel.value;
     resetSim();
   };
+
 });
