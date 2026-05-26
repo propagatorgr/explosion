@@ -22,6 +22,17 @@ body {
   margin-top: 15px;
   margin-bottom: 5px;
 }
+  #theoryOverlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+#theoryOverlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 canvas {
   display: block;
   margin: 0 auto;
@@ -132,7 +143,6 @@ canvas {
 
 </div>
 <div id="theoryOverlay" onclick="toggleTheory()" style="
-  display:none;
   position:fixed;
   top:0;
   left:0;
