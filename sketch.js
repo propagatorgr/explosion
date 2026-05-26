@@ -240,9 +240,13 @@ function updateUI() {
   document.getElementById("t").innerText = t.toFixed(2);
   document.getElementById("h").innerText = hVal.toFixed(2);
 
-  document.getElementById("ratioS").innerText = ratio;
-  document.getElementById("ratioU").innerText = ratio;
-  document.getElementById("ratioE").innerText = ratio;
+  let rs = document.getElementById("ratioS");
+  if (rs) rs.innerText = ratio;
+  let ru = document.getElementById("ratioU");
+  if (ru) ru.innerText = ratio;
+ let re = document.getElementById("ratioE");
+  if (re) re.innerText = ratio;
+ 
 }
 
 // =========================
