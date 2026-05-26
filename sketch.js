@@ -273,12 +273,18 @@ function updateUI() {
   document.getElementById("t").innerText = t.toFixed(2);
   document.getElementById("h").innerText = hVal.toFixed(2);
 
-  let rs = document.getElementById("ratioS");
-  if (rs) rs.innerText = ratio;
-  let ru = document.getElementById("ratioU");
-  if (ru) ru.innerText = ratio;
- let re = document.getElementById("ratioE");
-  if (re) re.innerText = ratio;
+  let ratio = (1 - frac) / frac;
+let fracText = toFraction(ratio);
+
+let rs = document.getElementById("ratioS");
+if (rs) rs.innerText = fracText;
+
+let ru = document.getElementById("ratioU");
+if (ru) ru.innerText = fracText;
+
+let re = document.getElementById("ratioE");
+if (re) re.innerText = fracText;
+
  
 }
 
