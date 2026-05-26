@@ -108,6 +108,7 @@ canvas {
       <button onclick="explode()">Έκρηξη</button>
       <button onclick="resetSim()">RESET</button>
       <button id="pauseBtn" onclick="togglePause()">Stop</button>
+      <button onclick="toggleTheory()">Θεωρία</button>
     </div>
 
   </div>
@@ -120,6 +121,71 @@ canvas {
     <div>E<sub>1</sub> / E<sub>2</sub> = <span id="ratioE">-</span></div>
   </div>
 
+</div>
+<div id="theoryOverlay" style="
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:1000;
+">
+
+  <div style="
+    background:white;
+    width:60%;
+    max-width:800px;
+    margin:40px auto;
+    padding:20px;
+    border-radius:10px;
+    text-align:left;
+    max-height:80%;
+    overflow-y:auto;
+  ">
+
+    <h2>Θεωρητική Ανάλυση</h2>
+
+    <h3>1. Κατανομή μάζας</h3>
+    <p>m<sub>1</sub> = f·m, &nbsp;
+       m<sub>2</sub> = (1−f)·m</p>
+
+    <h3>2. Διατήρηση ορμής</h3>
+    <p>
+      f·u<sub>1</sub> + (1−f)·u<sub>2</sub> = 0
+    </p>
+    <p>
+      u<sub>2</sub> = − f/(1−f) · u<sub>1</sub>
+    </p>
+
+    <h3>3. Διατήρηση ενέργειας</h3>
+    <p>
+      E = ½ m<sub>1</sub>u<sub>1</sub><sup>2</sup> 
+        + ½ m<sub>2</sub>u<sub>2</sub><sup>2</sup>
+    </p>
+
+    <h3>4. Σχέσεις</h3>
+    <p>
+      S<sub>1</sub>/S<sub>2</sub> = u<sub>1</sub>/|u<sub>2</sub>|
+      = E<sub>1</sub>/E<sub>2</sub> = (1−f)/f
+    </p>
+
+    <h3>5. Χρόνος πτώσης</h3>
+    <p>
+      t = √(2H/g)
+    </p>
+
+    <h3>Συμπέρασμα</h3>
+    <p>
+      Το ελαφρύτερο σώμα αποκτά μεγαλύτερη ταχύτητα,
+      διανύει μεγαλύτερη απόσταση και λαμβάνει μεγαλύτερο μέρος της ενέργειας.
+    </p>
+
+    <br>
+    <button onclick="toggleTheory()">Κλείσιμο</button>
+
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
