@@ -229,7 +229,9 @@ function updateUI() {
   if (phase === "up") {
     hVal = u * t - 0.5 * g * t * t;
   }
-
+  if (phase === "top") {
+  hVal = u * u / (2 * g);
+}
   if (phase === "projectile" && left && right) {
     hVal = left.y;
   }
