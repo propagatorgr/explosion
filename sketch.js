@@ -268,8 +268,7 @@ function updateUI() {
   }
 
   // ✅ λόγοι (ανεξάρτητοι από χρόνο!)
-  let ratio = ((1 - frac) / frac).toFixed(2);
-
+  
   document.getElementById("t").innerText = t.toFixed(2);
   document.getElementById("h").innerText = hVal.toFixed(2);
 
