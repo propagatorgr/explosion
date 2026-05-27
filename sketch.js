@@ -42,7 +42,7 @@ function computeScale() {
 
   let scaleX;
 
-  if (width < 600) {
+if (window.innerWidth < 600){
     // ✅ MOBILE FIX: υπολογισμός ξεχωριστά για δεξιά και αριστερά
     let scaleRight = (width / 2 - 30) / SR;
     let scaleLeft  = (width / 2 - 30) / SL;
