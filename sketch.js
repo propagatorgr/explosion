@@ -39,8 +39,9 @@ function computeScale() {
 
   let Smax = Math.max(vR, vL) * tFall;
 
-  let scaleX = width * 0.65 / Smax;
-  let scaleY = height * 0.80 / h;
+ let factorX = (width < 600) ? 0.50 : 0.65;
+ let scaleX = width * factorX / Smax;
+ let scaleY = height * 0.80 / h;
 
   scale = Math.min(scaleY, scaleX);
 }
