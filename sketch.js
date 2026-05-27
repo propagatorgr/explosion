@@ -37,15 +37,29 @@ function computeScale() {
   let vR = Math.sqrt((2 * E) / (mR + (mR * mR) / mL));
   let vL = Math.abs((mR / mL) * vR);
 
-  let Smax = Math.max(vR, vL) * tFall;
+  let SR = vR * tFall;
+  let SL = vL * tFall;
 
- let usableWidth = (width < 600) ? (width - 60) : (width * 0.65);
-let scaleX = usableWidth / Smax;
+  let scaleX;
 
- let scaleY = height * 0.80 / h;
+  if (width < 600) {
+    // ✅ MOBILE FIX: υπολογισμός ξεχωριστά για δεξιά και αριστερά
+    let scaleRight = (width / 2 - 30) / SR;
+    let scaleLeft  = (width / 2 - 30) / SL;
+
+    scaleX = Math.min(scaleRight, scaleLeft);
+
+  } else {
+    // ✅ DESKTOP: Ο ΚΩΔΙΚΑΣ ΣΟΥ ΑΚΡΙΒΩΣ ΟΠΩΣ ΗΤΑΝ
+    let Smax = Math.max(vR, vL) * tFall;
+    scaleX = width * 0.65 / Smax;
+  }
+
+  let scaleY = height * 0.80 / h;
 
   scale = Math.min(scaleY, scaleX);
 }
+
 
 function toX(x) {
   return width / 2 + x * scale;
